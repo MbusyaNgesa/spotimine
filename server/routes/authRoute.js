@@ -1,9 +1,8 @@
 import express from "express";
+import { authCallback } from "../controller/authController.js";
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  res.send("Auth route");
-});
+router.post("/callback", authCallback);
 
 export default router;
