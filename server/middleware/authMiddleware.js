@@ -20,5 +20,7 @@ export const requireAdmin = async (req, res, next) => {
     }
 
     next();
-  } catch (error) {}
+  } catch (error) {
+    next(error);
+  }
 };

@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  checkAdmin,
   createAlbum,
   createSong,
   deleteAlbum,
@@ -9,10 +10,14 @@ import { protectRoute, requireAdmin } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-router.post("/songs", protectRoute, requireAdmin, createSong);
-router.delete("/songs/:id", protectRoute, requireAdmin, deleteSong);
+router.use(protectRoute, requireAdmin);
 
-router.post("/albums", protectRoute, requireAdmin, createAlbum);
-router.delete("/albums/:id", protectRoute, requireAdmin, deleteAlbum);
+router.get("/check", checkAdmin);
+
+router.post("/songs", createSong);
+router.delete("/songs/:id", deleteSong);
+
+router.post("/albums", createAlbum);
+router.delete("/albums/:id", deleteAlbum);
 
 export default router;
